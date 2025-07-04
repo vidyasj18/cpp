@@ -154,3 +154,30 @@ public:
 };
 
 
+// qs - 5 : merge 2 sorted array into 1 array
+
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int a = m-1;
+        int b = n-1;
+        int r = m + n-1;
+
+        while(b>=0) {
+            if(a>=0 && nums1[a] > nums2[b]) {
+                nums1[r] = nums1[a];
+                a--;
+                r--;
+            }
+
+            else {
+                nums1[r] = nums2[b];
+                b--;
+                r--;
+            }
+
+        }
+    }
+};
+
+
