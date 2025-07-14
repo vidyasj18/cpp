@@ -315,3 +315,21 @@ public:
     
 };
 
+
+// qs - 10 : search majority element in an array
+// majority element is the element which appears more than n/2 times
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        // sort the array
+        sort(nums.begin(),nums.end());
+
+        // return array at index n/2 - anyways this should return the correct ans
+        return nums[n/2];
+
+        
+    }
+};
+
