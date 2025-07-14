@@ -182,33 +182,53 @@ public:
 
 
 
-// QS - 6 : House robber - leetcode
-// maximum sum of non - adjacent elements
+// qs - 6 : Find the duplicate number - Leetcode
+// [1,n] - 1 element is repeating
 
 class Solution {
 public:
-    int rob(vector<int>& nums) {
-        int n = nums.size();
+    int findDuplicate(vector<int>& nums) {
+        // Brute force approach
 
-        if(n==0) {
-            return 0;
+        // int n = nums.size();
+        // int ans = -1;
+        // for(int i = 0; i<n; i++) {
+        //     for(int j = i+1; j<n; j++) {
+        //         if(i<n-1 && nums[i]==nums[j]) {
+        //             ans = nums[i];
+        //         }
+        //     }
+        // }
+
+        // return ans;
+
+        // optimised approach - linkedlist cycle method
+
+        // mark slow and fast pointer at the same element initially
+        int fast = nums[0];
+        int slow = nums[0];
+
+        // while the case slow == fast 
+        // move slow pointer 1 step
+        // move fast pointer 2 steps
+        do {
+            slow = nums[slow]; // +1 step forward
+            fast = nums[nums[fast]]; // +2 step forward
+        } while(slow!=fast);
+
+        // assign slow to the initially assigned element
+        slow = nums[0];
+
+        // move slow and fast pointer 1 step each time
+        // when the slow and fast pointer meets that is where the cycle
+        // exists and that is the duplicate number
+        while(slow!=fast) {
+            slow = nums[slow];
+            fast = nums[fast];
         }
 
-        if(n==1) {
-            return nums[0];
-        }
+        return slow;
 
-        vector<int> dp(n+1,0);
-        dp[0] = nums[0];
-        dp[1] = max(nums[0],nums[1]);
-
-        for(int i = 2; i<n; i++) {
-            int fs = dp[i-2] + nums[i];
-            int ss = dp[i-1];
-            dp[i] = max(fs,ss);
-        }
-
-        return dp[n-1];
     }
 };
 
