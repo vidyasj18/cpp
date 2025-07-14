@@ -316,7 +316,7 @@ public:
 };
 
 
-// qs - 10 : search majority element in an array
+// qs - 10 : search majority element in an array - Leetcode
 // majority element is the element which appears more than n/2 times
 
 class Solution {
@@ -330,6 +330,28 @@ public:
         return nums[n/2];
 
         
+    }
+};
+
+
+// qs - 11 : 2 sum problem - Leetcode
+// when 2 elements are added and their summation equals target
+// return ins=dexes of those 2 elements
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ans;
+        for(int i = 0; i<nums.size(); i++) {
+            for(int j = i+1; j<nums.size(); j++) {
+                if(nums[i]+nums[j]==target) {
+                    ans.push_back(i);
+                    ans.push_back(j);
+                }
+            }
+        } 
+
+        return ans;
     }
 };
 
