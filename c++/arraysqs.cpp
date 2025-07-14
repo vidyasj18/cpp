@@ -233,3 +233,52 @@ public:
 };
 
 
+// qs - 7 : find missing and repeated values in a grid - Leetcode
+// You are given a 0-indexed 2D integer matrix grid of size n * n with values in the range [1, n2]. 
+// Each integer appears exactly once except a which appears twice and b which is missing. 
+// The task is to find the repeating and missing numbers a and b.
+// Return a 0-indexed integer array ans of size 2 where ans[0] equals to a and ans[1] equals to b.
+
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        // using hashing
+        int n = grid.size();
+        int rpt = 0;
+        int mis = 0;
+
+        // make a vector of n*n size and mark as 0
+        vector<int> ans(n*n + 1 ,0);
+
+        // go through all the grid memebers and increase their 
+        // counting in the vector ans
+
+        for(int i = 0; i<n; i++) {
+            for(int j = 0; j<n; j++) {
+                ans[grid[i][j]]++;
+
+                // if the counting increases to 2 
+                // that is repeating value
+                if(ans[grid[i][j]]==2) {
+                    rpt = grid[i][j];
+                }
+            }
+        }
+
+        // check if anything is zero in given ans vector
+        // if it is zero, missing number is that vector index
+        for(int i = 1; i<n*n + 1; i++) {
+            if(ans[i]==0) {
+                mis = i;
+            }
+        }
+
+        // ans1 vector and push rpt and mis
+        vector<int> ans1;
+        ans1.push_back(rpt);
+        ans1.push_back(mis);
+
+        return ans1;
+    }
+};
+
