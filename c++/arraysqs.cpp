@@ -355,3 +355,34 @@ public:
     }
 };
 
+
+// qs - 12 : calculate maximum subarray - leecode
+// T.C : O(n)     S.C : O(1)
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+
+        // optimised approach using kadanes algo
+        int currsum = 0;
+        int maxsum = INT_MIN;
+
+        for(int i = 0; i<nums.size(); i++) {
+            // add elements to currsum
+            currsum = currsum + nums[i];
+
+            // maxsum becomes equal to max value of currsum after addition or maxsum before addition
+            maxsum = max(currsum,maxsum);
+
+            // if currsum becomes negative then set that to 0
+            // then curr sum is calculated from next element of nums[i]
+            // or current i
+            if(currsum < 0) {
+                currsum = 0;
+            }
+        }
+
+        return maxsum;
+    }
+};
+
