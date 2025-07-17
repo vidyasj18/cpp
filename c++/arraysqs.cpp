@@ -386,3 +386,66 @@ public:
     }
 };
 
+
+// qs - 13 : subarray sum equals k
+// return number of subarrays count whose sum equals to k
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        
+        // better approach - T.C : O(n*2) S.C : O(1)
+        // int cnt = 0;
+        // for(int i = 0; i<nums.size(); i++) {
+
+        //     int sum = 0;
+
+        //     for(int j = i; j<nums.size(); j++) {
+        //         sum += nums[j];
+
+        //         if(sum==k) {
+        //             cnt++;
+        //         }
+        //     }
+        // }
+
+        // return cnt++;
+
+        // optimised approach - T.C : O(n)   S.C - O(n)
+
+        int n = nums.size();
+        int count = 0;
+        vector<int> prefSum(n,0);
+
+        // calculate prefixsum and store it in their respective index
+        prefSum[0] = nums[0];
+        for(int i = 1; i<n; i++) {
+            prefSum[i] = prefSum[i-1] + nums[i];
+        }
+
+        // create map
+        // prefSum of an index and its no. of occurances 
+        // in the prefSum vector
+        // map < prefSum[j],no. of occurances >
+
+        unordered_map<int,int> m;
+        for(int j = 0; j<n; j++) {
+            if(prefSum[j] == k) count++;
+
+            int val = prefSum[j] - k;
+            if(m.find(val)!=m.end()) {
+                count += m[val];
+            }
+
+            if(m.find(prefSum[j]) == m.end()) {
+                m[prefSum[j]] = 0;
+            }
+
+            m[prefSum[j]]++;
+        }
+
+        return count;
+
+    }
+};
+
